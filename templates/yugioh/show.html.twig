@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ card.cardName }}{% endblock %}
+
+{% block body %}
+   <h1>{{ card.cardName }}</h1>
+   <p>{{ card.setName }}</p>
+   <p>{{ card.rarity }}</p>
+   <hr>
+   <a href="/">Go Back</a>
+{% endblock %}
