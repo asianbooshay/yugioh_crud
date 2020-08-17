@@ -1,7 +1,7 @@
-const articles = document.getElementById('cards');
+const cards = document.getElementById('cards');
 
-if (articles) {
-    articles.addEventListener('click', (e) => {
+if (cards) {
+    cards.addEventListener('click', (e) => {
         if(e.target.className === 'btn btn-danger delete-article') {
             if(confirm('Are you sure?')) {
                 const id = e.target.getAttribute('data-id');

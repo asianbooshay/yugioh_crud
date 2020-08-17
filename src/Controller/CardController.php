@@ -19,10 +19,12 @@
          * @Method({"GET"})
          */
         public function index() {
-
-            $cards = $this->getDoctrine()->getRepository
-            (Card::class)->findAll();
-            return $this->render('yugioh/index.html.twig', array('cards' => $cards));
+            $cards = $this->getDoctrine()
+                ->getRepository(Card::class)
+                ->findAll();
+            return $this->render('yugioh/index.html.twig', [
+                'cards' => $cards
+            ]);
         }
 
         /**
@@ -33,21 +35,27 @@
             $card = new Card();
 
             $form = $this->createFormBuilder($card)
-                ->add('cardName', TextType::class, array('attr' => 
-                array('class' => 'form-control')
-                ))
-                ->add('setName', TextType::class, array(
-                    'required' => false,
-                    'attr' => array('class' => 'form-control')
-                ))
-                ->add('rarity', TextType::class, array(
-                    'required' => false,
-                    'attr' => array('class' => 'form-control')
-                ))
-                ->add('save', SubmitType::class, array(
+                ->add('cardName', TextType::class, [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('setName', TextType::class, [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('rarity', TextType::class, [
+                    'attr' => [
+                        'class' => 'form-control'
+                    ]
+                ])
+                ->add('save', SubmitType::class, [
                     'label' => 'Create',
-                    'attr' => array('class' => 'btn btn-primary mt-3')
-                ))
+                    'attr' => [
+                        'class' => 'btn btn-primary mt-3'
+                    ]
+                ])
                 ->getForm();
 
             $form->handleRequest($request);
@@ -62,9 +70,9 @@
                 return $this->redirectToRoute('yugioh_list');
             }
 
-            return $this->render('yugioh/new.html.twig', array(
+            return $this->render('yugioh/new.html.twig', [
                 'form' => $form->createView()
-            ));
+            ]);
         }
 
         /**
@@ -77,38 +85,42 @@
             (Card::class)->find($id);
 
             $form = $this->createFormBuilder($card)
-                ->add('cardName', TextType::class, array(
-                    'attr' => array(
-                    'class' => 'form-control')))
-                ->add('setName', TextType::class, array(
-                    'required' => false,
-                    'attr' => array(
-                    'class' => 'form-control')
-                ))
-                ->add('rarity', TextType::class, array(
-                    'required' => false,
-                    'attr' => array(
-                    'class' => 'form-control')
-                ))
-                ->add('save', SubmitType::class, array(
+                ->add('cardName', TextType::class, [
+                    'attr' => [
+                    'class' => 'form-control'
+                    ]
+                ])
+                ->add('setName', TextType::class, [
+                    'attr' => [
+                    'class' => 'form-control'
+                    ]
+                ])
+                ->add('rarity', TextType::class, [
+                    'attr' => [
+                    'class' => 'form-control'
+                    ]
+                ])
+                ->add('save', SubmitType::class, [
                     'label' => 'Update',
-                    'attr' => array('class' => 'btn btn-primary mt-3')
-                ))
+                    'attr' => [
+                        'class' => 'btn btn-primary mt-3'
+                    ]
+                ])
                 ->getForm();
 
             $form->handleRequest($request);
 
             if($form->isSubmitted() && $form->isValid()) {
-
-                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager = $this->getDoctrine()
+                    ->getManager();
                 $entityManager->flush();
 
                 return $this->redirectToRoute('yugioh_list');
             }
 
-            return $this->render('yugioh/edit.html.twig', array(
+            return $this->render('yugioh/edit.html.twig', [
                 'form' => $form->createView()
-            ));
+            ]);
         }
 
         
@@ -118,11 +130,13 @@
         public function show($id) {
             $card = $this->getDoctrine()->getRepository
             (Card::class)->find($id);
-            return $this->render('yugioh/show.html.twig', array('card' => $card));
+            return $this->render('yugioh/show.html.twig', [
+                'card' => $card
+            ]);
         }
 
         /**
-         * @Route("/yugioh/delete/{id}")
+         * @Route("/yugioh/delete/{id}", name="delete_card")
          * @Method({"DELETE"})
          */
         public function delete(Request $request, $id) {
@@ -133,8 +147,10 @@
             $entityManager->remove($card);
             $entityManager->flush();
 
-            $response = new Response();
-            $response->send();
+            return $this->redirect($request->headers->get('referer'));
         }
     }
+
+    //js main is no longer involved in this app. disregard it
+    //don't delete it tho. remember what robert said about deleting shit
 ?>

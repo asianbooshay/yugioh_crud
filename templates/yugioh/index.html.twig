@@ -16,13 +16,13 @@
                     <tr>
                         <td>{{ card.cardName }}</td>
                         <td>
-                            <a href="/yugioh/{{ card.id }}" 
+                            <a href="{{ path('card_show', {id: card.id}) }}"
                             class="btn btn-info">Show</a>
-                            <a href="/yugioh/edit/{{ card.id }}" 
+                            <a href="{{ path('edit_card', {id: card.id}) }}" 
                             class="btn btn-dark">Edit</a>
-                            <a href="#" 
-                            class="btn btn-danger delete-card"
-                            data-id="{{ card.id }}">Delete</a>
+                            <form method="delete" style="display: inline-block;" action="{{ path('delete_card', {id: card.id}) }}">
+                                <button class="btn btn-danger" onclick="confirm('Are you sure');">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

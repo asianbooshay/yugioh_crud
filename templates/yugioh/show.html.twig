@@ -3,9 +3,9 @@
 {% block title %}{{ card.cardName }}{% endblock %}
 
 {% block body %}
-   <h1>{{ card.cardName }}</h1>
+   <p>{{ card.cardName }}</p>
    <p>{{ card.setName }}</p>
    <p>{{ card.rarity }}</p>
    <hr>
-   <a href="/">Go Back</a>
+   <a href="{{ path('yugioh_list', {id: card.id}) }}">Go Back</a>
 {% endblock %}
