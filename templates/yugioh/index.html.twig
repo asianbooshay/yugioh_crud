@@ -16,8 +16,8 @@
                     <tr>
                         <td>{{ card.cardName }}</td>
                         <td>
-                            <a href="{{ path('card_show', {id: card.id}) }}"
-                            class="btn btn-info">Show</a>
+                            <a href="{{ path('see_sets', {id: card.id}) }}"
+                            class="btn btn-info">See Sets</a>
                             <a href="{{ path('edit_card', {id: card.id}) }}" 
                             class="btn btn-dark">Edit</a>
                             <form method="delete" style="display: inline-block;" action="{{ path('delete_card', {id: card.id}) }}">

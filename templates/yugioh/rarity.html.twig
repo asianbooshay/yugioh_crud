@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ card.cardName }}{% endblock %}
+
+{% block body %}
+    <p>{{ card.rarity }}</p>
+    <hr>
+    <a href="{{ path('see_sets') }}">Go Back to Sets</a>
+    <br>
+    <a href="{{ path('yugioh_list', {id: card.id}) }}">Go Back to Home</a>
+{% endblock %}

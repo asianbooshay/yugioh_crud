@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ card.cardName }}{% endblock %}
+
+{% block body %}
+   {% if card.setNames %}
+      <p>{{ card.cardName }}</p>
+         <table id="cards" class="table table-striped">
+            <thead>
+               <tr>
+                  <th>Set Names</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+                  {% for setNames in card %}
+                     <tr>
+                        <td>{{ card.setNames }}</td>
+                        <td>
+                           <a href="{{ path('see_rarity', {id: card.id}) }}"
+                              class="btn btn-info">See Rarity</a>
+                        </td>
+                     </tr>
+                  {% endfor %}
+               </tbody>
+         </table>
+      {% else %}
+        <p>No sets to display</p>
+      {% endif %}
+      <hr>
+      <a href="{{ path('yugioh_list', {id: card.id}) }}">Go Back</a>
+{% endblock %}

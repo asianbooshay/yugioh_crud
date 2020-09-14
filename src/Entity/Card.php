@@ -18,19 +18,19 @@ class Card
     private $id;
 
     /**
-     * @ORM\Column(type="text", length=100)
+     * @ORM\Column(type="text", length=200)
      */
     private $cardName;
 
     /**
-     * @ORM\Column(type="text", length=100)
+     * @ORM\Column(type="text")
      */
-    private $setName;
+    private $setNames = ''; //preset field to empty
 
     /**
      * @ORM\Column(type="text", length=100)
      */
-    private $rarity;
+    private $rarity = '';
 
     // Getters & Setters
     public function getId() {
@@ -45,12 +45,12 @@ class Card
         $this->cardName = $cardName;
     }
 
-    public function getSetName() {
-        return $this->setName;
+    public function getSetNames() {
+        return $this->setNames;
     }
 
-    public function setSetName($setName) {
-        $this->setName = $setName;
+    public function setSetNames($setNames) {
+        $this->setNames = $setNames;
     }
 
     public function getRarity() {
